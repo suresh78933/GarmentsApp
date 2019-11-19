@@ -5,7 +5,7 @@ module.exports ={
 		try{
 			html="<!doctype html><html lang='en'><head>";
 			html+="<meta charset='utf-8'>";
-			html+="<title>Sample5</title>";
+			html+="<title>Bill</title>";
 			html+="<style>";
 			html+=".container{ position: absolute; top: 30px; border: 2px black solid;left: 30px; }";
 			html+=".headRow{ min-height: 60px; }";
