@@ -1,0 +1,22 @@
+.addItemClass{	text-align: right;	padding-bottom: 8px;}
+.addItemClass img{	cursor: pointer;padding-left: 10px; }
+textarea { resize: none; }
+.container{ margin-top: 40px; }
+.table .tax-radio label{  margin-right: 10px;cursor: pointer; }
+.modalFooter { text-align: right; }
+.modalFooter img,button{	cursor: pointer;margin-right: 17px; }
+button{ background-color: white; }
+.table{ background-color: darkgrey; }
+.selGroup{ font-size: 18px;    padding: 14px; }
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.table td,.table th{ padding: 8px; }
+textarea,input[type]{     padding: 15px;    font-size: 18px; }
+.itemPercent{ position: absolute; top: 28px; left: 170px; font-size: 1.8rem; }
+.iconClass { font-size: 30px; background-color: darkcyan; }
+button:disabled,
+button[disabled]{ cursor: default;}
+.closeButt{ background-color: unset; }

@@ -1,0 +1,13 @@
+.addItemClass{
+	text-align: right;
+	padding-bottom: 8px;
+}
+.addItemClass img{
+	cursor: pointer;
+	padding-left: 10px;
+}
+.addUserTitle {	text-align: center; font-size: 34px; padding: 13px 0 0 0; }
+.userDetRow { padding: 37px; }
+.container{ width: 735px; }
+.form-control{ padding: 1rem 1rem; font-size: 1.6rem; }
+.userDetRow label{ font-size: 1.45rem; }

@@ -1,0 +1,102 @@
+<div class="limiter">
+	<div class="container-billItem100" style="background-image: url('../../assets/images/bg-01.jpg');">
+	<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" (click)="removeItem()">
+							Remove
+						</button>
+					</div>
+		<div class="logOut-class">
+		   <img src="assets/images/logout1.png" title="Logout">
+		</div>
+		<div class="billItem100-items"> 
+			<div class="wrap-bill100">
+			 	<span class="billItem-title">
+					Bill Items
+				</span>
+				<div class="items">
+					<table class="item-table" *ngIf="billItems.length">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Item #</th>
+								<th>Name</th>
+								<th>Qty</th>
+								<th>Cost(Rs.)</th>
+								<th>Modify</th>
+							</tr>
+						</thead>
+						<tbody>							
+							<tr *ngFor="let item of billItems;index as i">
+								<td>{{i+1}}</td>
+								<td>{{item.itemNo}}</td>
+								<td>{{item.itemName}}</td>
+								<td>1</td>
+								<td>20.00</td>
+								<td>Cost(Rs.)</td>
+							</tr>						
+						</tbody>
+					</table>
+					<h1 class="noItems" *ngIf="!billItems.length">No items added....</h1>
+				</div>
+			</div>
+			<div class="addItem-class">
+				<img src="assets/images/print-out.png" title="Print Bill" (click)="printBill()">
+		   		<img src="assets/images/additem.png" title="Add item" (click)="open(content)">
+			</div>			
+		</div>
+	</div>		
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Add Item</h3>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+          <div class='col s6'>
+          	<label for="dateOfBirth">Item #:</label>
+	        <div class="input-group">
+	          <input type="text" class="form-control" placeholder="Item Number" name="dp" [(ngModel)]="addItem.itemNo">
+	        </div>
+          </div>
+          <div class='col s6'>
+          	<label for="dateOfBirth">Item Name:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Item Name" name="dp" [(ngModel)]="addItem.itemName">
+	        </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+         <div class='col s4'>
+          	<label for="dateOfBirth">Qty:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Item Number" name="dp">
+	        </div>
+          </div>
+          <div class='col s4'>
+          	<label for="dateOfBirth">Price(Rs.):</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Item Number" name="dp">
+	        </div>
+          </div>
+          <div class='col s4'>
+          	<label for="dateOfBirth">Date of birth</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Item Number" name="dp">
+	        </div>
+          </div>
+        </div>       
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-lg btn-outline-dark" (click)="addIem()">Add</button>
+       <button type="button" class="btn btn-lg btn-outline-dark" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>

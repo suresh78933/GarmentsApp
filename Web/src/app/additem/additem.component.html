@@ -1,0 +1,197 @@
+<div class="limiter">
+	<div class="container-billItem100">		
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">
+		    	 	<img src="./assets/images/back.png" class="backButtonCss" title="Dashboard" (click)="goToDashBor();">
+		         	<div class="box-part text-center">
+			            <div class="project prjHed">  
+		                    <span class="headerDashB">Add Item</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>		   
+			<form>
+		      <div class="form-group">
+		       <div class="row">
+		          <div class='col col-3'>
+		          	<label for="itemid">Item #:</label>
+			        <div class="input-group">
+			            <input type="text"  autocomplete="off" class="form-control" placeholder="Item Number" name="itemNo" [disabled]="isValidItemNo" [(ngModel)]="addItem.itemNo">
+			            <span class="input-group-btn">
+					    <button [disabled]="isValidItemNo" (click)="searchId(addItem.itemNo)" title="Search for Id" class="btn btn-default iconClass" type="submit">
+					        <i class="fa fa-search"></i>
+					    </button>
+					  </span>
+			        </div>
+		          </div>
+		          <div class='col col-4'>
+		          	<label for="itemname">Item Name:</label>
+			        <div class="input-group">
+			          <input type="text" class="form-control" placeholder="Item Name" name="itemName" [(ngModel)]="addItem.itemName">
+			        </div>
+		          </div>
+		          <div class='col col-3'>
+		          	<label for="itemtype">Item Type:</label>
+			        <div class="input-group">	         
+			          <select [(ngModel)]="selectedTax" name="seleTax" class="selGroup" (ngModelChange)="onTaxChange()">
+			          	<option value="">--Select Tax Group--</option>
+					  	<option *ngFor="let tax of allTaxesArr" [ngValue]="tax">{{tax.tax_type}}</option>
+					</select>
+			        </div>
+		          </div>
+		          <div class='col col-2'>
+		          	<label for="itemHSNCode">HSN Code:</label>
+			        <div class="input-group">
+			          <input type="text" class="form-control" placeholder="HSN Code" name="itemHSNCode" [(ngModel)]="addItem.itemHSNCode">
+			        </div>
+		          </div>
+		        </div>
+		        <br/>        
+		        <div class="row">
+		         <div class='col col-2'>
+		          	<label for="itemqty">Qty:</label>
+			        <div class="input-group">
+			          <input class="form-control" placeholder="Qty" name="itemQty" type="number" min="1" [(ngModel)]="addItem.itemQty">
+			        </div>
+		          </div>
+		          <div class='col col-2'>
+		          	<label for="itemprice">Price(Rs.):</label>
+			        <div class="input-group">
+			          <input class="form-control" min="1" type="number" placeholder="Price" name="itemPric" (ngModelChange)="calTotAmount()" [(ngModel)]="addItem.itemPrice">
+			        </div>
+		          </div>
+		          <div class='col col-2'>
+		          	<label for="itemdiscount">Discount(%):</label>
+			        <div class="input-group">
+			          <input class="form-control" min="0" type="number" placeholder="Discount" (ngModelChange)="calTotAmount()" name="itemdisc" [(ngModel)]="addItem.itemDiscount">
+			        </div>
+			        <!-- <p class="itemPercent">%</p> -->
+		          </div>
+		           <div class='col col-2'>
+		          	<label for="baceprice">Base Price:</label>
+			        <div class="input-group">
+			          <input class="form-control" [disabled]="true" type="number" placeholder="Price" name="itembasePri" [(ngModel)]="addItem.itemBasPrice">
+			        </div>	       
+		          </div>
+		          <div class='col col-4 selectedTax'>
+		          	<table class="table" *ngIf="selectedTax">
+							  <thead>
+							    <tr>
+							      <th scope="col">C GST</th>
+							      <th scope="col">S GST</th>
+							      <th scope="col">Tax</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+									<td>{{addItem.TaxApplied.cgst|number:'1.2-2'}}</td>
+									<td>{{addItem.TaxApplied.sgst |number:'1.2-2'}}</td>
+									<td class="tax-radio">		
+										<label class="radio-inline">
+									      <input type="radio" [value]="true" [(ngModel)]="taxIncluded" name="tax" (click)="checkTaxInclude('true')">Include
+									    </label>
+									    <label class="radio-inline">
+									      <input type="radio" [value]="false" [(ngModel)]="taxIncluded" name="tax" (click)="checkTaxInclude('false')">Exclude
+									    </label>
+									</td>
+								</tr>								   
+							  </tbody>
+						</table>
+		          </div>
+		        </div>		       
+		        <div class="row modalFooter">
+		        	<div class="col col-6">		        		
+		        	</div>
+		        	<div class="col col-6">		        		  
+						<button type="button" class="btn btn-lg btn-outline-dark" (click)="confirmDet(content)" *ngIf="isValidItemNo">Confirm</button>			
+		        	</div>
+		        </div>		           
+		      </div>
+		    </form>
+		</div>
+	</div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Confirm Item Details</h3> 
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>   
+  </div>
+  <div class="modal-body">		      
+        <div class="row selectedTax">
+        	<div class="col col-6">
+	        	<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col" colspan="2">Product Details</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+							<td>Item #</td>
+							<td>{{addItem.itemNo}}</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>{{addItem.itemName}}</td>
+						</tr>
+						<tr>
+							<td>Qty</td>
+							<td>{{addItem.itemQty}}</td>
+						</tr>
+						<tr>
+							<td>Price</td>
+							<td>{{addItem.itemPrice}}</td>
+						</tr>
+						<tr>
+							<td>Discount</td>							
+							<td *ngIf="addItem.itemDiscount==0">--</td>
+							<td *ngIf="addItem.itemDiscount!=0">{{addItem.itemDiscount}}%</td>
+						</tr>
+						<tr>
+							<td>Base Price</td>
+							<td>Rs.{{addItem.itemBasPrice}}</td>
+						</tr>
+						<tr>
+							<td>HSN Code</td>
+							<td>{{addItem.itemHSNCode}}</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+			<div class="col col-6">
+	        	<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col" colspan="2">Tax Details</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+							<td>Item Group</td>
+							<td>{{addItem.TaxApplied.tax_type}}</td>
+						</tr>
+						<tr>
+							<td>Tax Included</td>
+							<td>{{addItem.isTaxIncluded}}</td>
+						</tr>
+						<tr>
+							<td>SGST</td>
+							<td>{{addItem.TaxApplied.sgst}}</td>
+						</tr>
+						<tr>
+							<td>CGST</td>
+							<td>{{addItem.TaxApplied.cgst}}</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+        </div>
+  </div>
+  <div class="modal-footer">  	  	  
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="saveToServer()" *ngIf="isValidItemNo">Save</button>
+		<!-- <button type="button" class="btn btn-lg btn-outline-dark" (click)="modal.close()">Close</button>  -->     
+  </div>
+</ng-template>

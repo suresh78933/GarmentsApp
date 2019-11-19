@@ -1,0 +1,159 @@
+<div class="limiter">
+	<div class="container-billItem100">		
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">
+		    	 	<img src="./assets/images/back.png" class="backButtonCss" title="Dashboard" (click)="goToDashBor();">
+		         	<div class="box-part text-center">
+			            <div class="project prjHed">  
+		                    <span class="headerDashB">Shop Info and Tax(s)</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>
+		    <div class="row titleCss">
+		    	<div class="col col-12">
+		    		<h2>Shop Details</h2>
+		    	</div>
+		    </div>
+		    <div>
+		    	<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">Shop Name</th>
+					      <th scope="col">Mobile No</th>
+					      <th scope="col">Address</th>
+					      <th scope="col">GSTIN</th>
+					    </tr>
+					  </thead>
+					  <tbody class="table-dark">
+					    <tr class="hover-row table-warning" (click)="openInfo('shop',content)">	
+							<td>{{shopInfo_RO.shop_name}}</td>	
+							<td>+91-{{shopInfo_RO.shop_ph_num}}</td>
+							<td>{{shopInfo_RO.shop_no}},{{shopInfo_RO.shop_street}},{{shopInfo_RO.shop_area}},{{shopInfo_RO.shop_city}},<br/>{{shopInfo_RO.pincode}}</td>
+							<td>{{shopInfo_RO.shop_gstin_num}}</td>
+						</tr>										   
+					  </tbody>
+				</table>
+		    </div>
+		    <div class="row titleCss">
+		    	<div class="col col-12">
+		    		<h2>Tax Details</h2>
+		    	</div>
+		    </div>
+		    <div>
+		    	<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">S.No</th>     
+					      <th scope="col">Tax Type</th>
+					      <th scope="col">CGST</th>
+					      <th scope="col">SGST</th>				      
+					    </tr>
+					  </thead>
+					  <tbody class="table-dark">
+					    <tr *ngFor="let tax of allTaxesArr;index as i" [ngClass]="{'table-warning':i%2==0}" class="hover-row" (click)="openInfo('tax',content,tax)">		
+							<td>{{i+1}}</td>
+							<td>{{tax.tax_type}}</td>
+							<td>{{tax.cgst|number:'1.2-2'}}</td>
+							<td>{{tax.sgst|number:'1.2-2'}}</td>
+						</tr>										   
+					  </tbody>
+				</table>
+		    </div>
+		 </div>
+	</div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">{{modTitle}} Info.</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>    
+  </div>
+  <div class="modal-body" >
+    <form>
+      <div class="form-group" *ngIf="shoinfoClick">
+       <div class="row">
+          <div class='col col-3'>
+          	<label for="sName">Shop Name</label>
+	        <div class="input-group">
+	          <input type="text" class="form-control" name="sname" [(ngModel)]="shopInfo.shop_name">
+	        </div>
+          </div>          
+          <div class='col col-3'>
+          	<label for="smobilenum">Mobile Number</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" placeholder="Mobile number" name="smobilenum" [(ngModel)]="shopInfo.shop_ph_num">
+	        </div>
+          </div>   
+          <div class='col col-4'>
+          	<label for="gstin_num">GSTIN</label>
+	        <div class="input-group">
+	          <input class="form-control" type="text" placeholder="GSIN Number" name="gstin_num" [(ngModel)]="shopInfo.shop_gstin_num">
+	        </div>
+          </div>      
+          <div class='col col-2'>
+          	<label for="saddr1">Shop #:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Shop Number" name="saddr1" [(ngModel)]="shopInfo.shop_no">
+	        </div>
+          </div>         
+        </div>
+        <br/>
+        <div class="row">         
+          <div class='col col-3'>
+          	<label for="saddr2">Street :</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Street Name" name="saddr2" [(ngModel)]="shopInfo.shop_street">
+	        </div>
+          </div>
+          <div class='col col-3'>
+          	<label for="saddr3">Area :</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Area" name="saddr3" [(ngModel)]="shopInfo.shop_area">
+	        </div>
+          </div>
+          <div class='col col-3'>
+          	<label for="saddr4">City :</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="City" name="saddr4" [(ngModel)]="shopInfo.shop_city">
+	        </div>
+          </div>
+          <div class='col col-3'>
+          	<label for="saddr5">Pincode :</label>
+	        <div class="input-group">
+	          <input type="number" class="form-control" placeholder="Pincode" name="saddr5" [(ngModel)]="shopInfo.pincode">
+	        </div>
+          </div>        
+        </div>       
+      </div>
+      <div class="form-group" *ngIf="taxinfoClick">
+       <div class="row">
+          <div class='col col-4'>
+          	<label for="taxtype">Tax Type :</label>
+	        <div class="input-group">
+	          <input type="text" [disabled]="true" class="form-control" name="taxtype" [(ngModel)]="editTax.tax_type">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="cgst">CGST(%) :</label>
+	        <div class="input-group">
+	          <input type="number" class="form-control" placeholder="CGST" name="cgst" [(ngModel)]="editTax.cgst">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="sgst">SGST(%) :</label>
+	        <div class="input-group">
+	          <input type="number" class="form-control" placeholder="SGST" name="sgst" [(ngModel)]="editTax.sgst">
+	        </div>
+          </div>          
+        </div>             
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">		
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="updateInfo()">Update</button>
+		<!-- <button type="button" class="btn btn-lg btn-outline-dark" (click)="modal.close()">Close</button> -->      
+  </div>
+</ng-template>

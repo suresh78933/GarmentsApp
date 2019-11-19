@@ -1,0 +1,39 @@
+@page { size: auto;  margin: 0mm; }
+.container { max-width: 1033px; }
+.headRow{ min-height: 60px; }
+.printHeader{ background-color: green; }
+.printHeader .pheader1,.printHeader .pheader2{ color: white; }
+.printHeader .pheader2{ font-size: 44px;    font-family: Brush Script MT;    position: absolute; left: 440px; }
+.printHeader .pheader1{ position: absolute;    left: 270px;    top: 5px; }
+.printHeader .pheader3{ position: absolute;left: 852px;top: 15px; font-weight: bold; }
+.headRow2 { min-height: 34px;background-color: white; font-size:14px;    }
+.printHeader2 .pheader1{ position: absolute; left: 4px;top: 0px; }
+.printHeader2 .pheader2{ position: absolute;  left: 4px;top: 16px; }
+.printHeader2 .pheader3{ position: absolute;left: 450px; top: 14px;}
+.headRow3 { min-height: 30px;background-color: lightblue;text-align: center; }
+.headRow3 .pheader1{ font-size: 20px;font-weight: bold;  font-family: Times New Roman; }
+.custDetRow{ background-color: white;min-height: 50px; }
+.custDetRow .billDetCol{ text-align: right;display: grid;padding-right: 6px }
+.custDetRow .billDetCol2{ text-align: left;display: grid;padding-left: 2px }
+.custDetRow .col-8{ padding-left: 5px; }
+.custDetRow hr{ border-top: black 2px solid; }
+.custDetRow .pheader2{ position: absolute;top: 19px;left: 30px }
+.custDetRow .pheader3{position: absolute;top: 41px;left: 30px }
+.custDetRow .hrclass1{ width: 250px;position: absolute;top: 24px; }
+.custDetRow .hrclass2{ width: 400px;position: absolute;top: 46px; }
+.thead{ background-color: lightblue;color: black; }
+.headEmptyRow{ min-height: 12px;background-color: white;  }
+.borderTopNBot{ border-top: black 2px solid;border-bottom: black 2px solid; }
+.borderTop{ border-top: black 2px solid; }
+.borderRnLeft{ border-right: black 1px solid;border-left: black 1px solid; }
+.table{ font-size: 13px;background-color: white;margin-bottom: 0rem;border-left: 1px solid black; }
+.table th,.table td{ padding: 0px;vertical-align: middle;border-top: 1px black solid; border-bottom: 0px black solid; }
+/*table, th, td {  border: 1px solid black;}*/
+.table thead tr th{ border-right: 1px solid black;border-bottom: 1px solid black; }
+.table thead tr th:last-child{ border-bottom: 1px solid black;border-right: 1px solid black; }
+.table tbody tr td{ border-right: 1px solid black;border-bottom: 1px solid black;}
+.table tbody tr:last-child td{ border-right: 1px solid black; border-bottom: 1px solid black;}
+.emptyValArr{ visibility: hidden; }
+.alignLeft{ text-align: left;padding-left: 3px; }
+.bglightGreen{ background-color: lightblue; }
+.rotate{ -webkit-transform: rotate(-38deg);color: darkgray; -moz-transform: rotate(-38deg);  -ms-transform: rotate(-38deg);  -o-transform: rotate(-38deg);  transform: rotate(-38deg); }

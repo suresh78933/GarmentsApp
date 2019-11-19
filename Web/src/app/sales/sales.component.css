@@ -1,0 +1,29 @@
+.active{
+  color:green;
+  border-bottom: solid 3px white;
+}
+.not-active{
+  color:black;
+}
+.selectionRow span{  cursor: pointer; }
+.iconClass { font-size: 20px; background-color: darkcyan; }
+.selGroup { padding: 4px 5px 4px 10px;}
+.input-group-append { background-color: darkgray; }
+.container{ margin-top: 40px; }
+.selectionRow { padding-bottom: 12px;font-size: 24px; }
+.selectionRow span:not([last-child]){ margin-right: 30px; }
+.seleCol { top:20px; }
+.seleCol button { background-color: white; }
+.seleCol button:hover{ background-color: gray;color:white; }
+.table{ font-size: 16px;background-color: white; }
+.table th,.table td{ padding: 0px;vertical-align: middle;  }
+.table td{ padding: 6px; }
+.modal-body .row span{ font-size: 20px;background-color: #0b0bef; color: white; }
+.backButtonCss1{ position: absolute;top: 20px; }
+.backButtonCss1 img{ background-color: cyan; }
+.backButtonCss1 .dropdown-items{display: none;}
+.backButtonCss1:hover .dropdown-items{display: block;}
+.backButtonCss1 ul{ z-index: 999; position: absolute; width: 200px;background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);}
+.backButtonCss1 ul li{ padding: 15px;}
+.backButtonCss1 ul li:hover {cursor:pointer; background-color: lightcoral; color: #e7ece3;}

@@ -1,0 +1,241 @@
+<div class="limiter">
+	<div class="container-billItem100">		
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">
+		    	 	<img src="./assets/images/back.png" class="backButtonCss" title="Dashboard" (click)="goToDashBor();">
+		         	<div class="box-part text-center">
+			            <div class="project prjHed">  
+		                    <span class="headerDashB">Add Item</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>
+		    <!-- <div>
+				<table class="table" *ngIf="addAllItems.length">
+				  <thead>
+				    <tr>
+				      <th scope="col">S.No</th>
+				      <th scope="col">Item #</th>
+				      <th scope="col">Name</th>
+				      <th scope="col">Qty</th>
+				      <th scope="col">Price</th>
+				      <th scope="col">Description</th>
+				    </tr>
+				  </thead>
+				  <tbody class="table-dark">
+				    <tr *ngFor="let item of addAllItems;index as i" [ngClass]="{'table-warning':i%2==0}" >
+						<td>{{i+1}}</td>
+						<td>{{item.itemNo}}</td>
+						<td>{{item.itemName}}</td>
+						<td>{{item.itemQty}}</td>
+						<td>{{item.itemPrice}}</td>
+						<td>{{item.itemDesc}}</td>
+					</tr>				   
+				  </tbody>
+				</table>
+			</div>
+			<div class="row" *ngIf="!addAllItems.length">
+				<div class="col col-12">
+					<h3>No items added....</h3>
+				</div>
+			</div>
+		    <div class="row">
+		    	<div class="col col-12 addItemClass">		    		
+		    		<img src="assets/images/save.png" title="Send to Server" (click)="saveToServer()" *ngIf="addAllItems.length">
+		    		<img src="assets/images/additem.png" title="Add item" (click)="open(content)">
+		    	</div>
+		    </div>    
+		</div> -->
+		<form>
+      <div class="form-group">
+       <div class="row">
+          <div class='col s4'>
+          	<label for="itemid">Item #:</label>
+	        <div class="input-group">
+	          <input type="text" class="form-control" placeholder="Item Number" name="itemNo" [disabled]="isValidItemNo" [(ngModel)]="addItem.itemNo">
+	        </div>
+          </div>
+          <div class='col s4'>
+          	<label for="itemname">Item Name:</label>
+	        <div class="input-group">
+	          <input type="text" class="form-control" placeholder="Item Name" name="itemName" [(ngModel)]="addItem.itemName">
+	        </div>
+          </div>
+           <div class='col s4'>
+          	<label for="itemtype">Item Type:</label>
+	        <div class="input-group">	         
+	          <select [(ngModel)]="selectedTax" name="seleTax" class="selGroup" (ngModelChange)="onTaxChange()">
+	          	<option value="">--Select Tax Group--</option>
+			  	<option *ngFor="let tax of allTaxesArr" [ngValue]="tax">{{tax.tax_type}}</option>
+			</select>
+	        </div>
+          </div>
+        </div>
+        <br/>        
+        <div class="row">
+         <div class='col col-2'>
+          	<label for="itemqty">Qty:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Qty" name="itemQty" type="number" [(ngModel)]="addItem.itemQty">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="itemprice">Price(Rs.):</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" placeholder="Price" name="itemPric" [(ngModel)]="addItem.itemPrice">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="itemdiscount">Discount(%):</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" placeholder="Discount" name="itemdisc" [(ngModel)]="addItem.itemDiscount">
+	        </div>
+	        <!-- <p class="itemPercent">%</p> -->
+          </div>
+           <div class='col col-2'>
+          	<label for="baceprice">Bace Price:</label>
+	        <div class="input-group">
+	          <input class="form-control" [disabled]="true" type="number" placeholder="Price" name="itembasePri" [(ngModel)]="addItem.itemBasPrice">
+	        </div>	       
+          </div>
+          <div class='col col-4'>
+          	<label for="descrip">Description</label>
+	        <div class="input-group">
+	          <textarea class="form-control" [(ngModel)]="addItem.itemDesc" placeholder="Item Number" name="desc"></textarea>
+	        </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row selectedTax">
+        	<div class="col col-6">
+	        	<table class="table" *ngIf="selectedTax">
+					  <thead>
+					    <tr>
+					      <th scope="col">C GST</th>
+					      <th scope="col">S GST</th>
+					      <th scope="col">Tax</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+							<td>{{addItem.TaxApplied.cgst|number:'1.2-2'}}</td>
+							<td>{{addItem.TaxApplied.sgst |number:'1.2-2'}}</td>
+							<td class="tax-radio">		
+								<label class="radio-inline">
+							      <input type="radio" name="tax">Include
+							    </label>
+							    <label class="radio-inline">
+							      <input type="radio" name="tax">Exclude
+							    </label>
+							</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+        </div>       
+      </div>
+    </form>
+	</div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Add Item</h3>    
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+          <div class='col s4'>
+          	<label for="itemid">Item #:</label>
+	        <div class="input-group">
+	          <input type="text" class="form-control" placeholder="Item Number" name="itemNo" [disabled]="isValidItemNo" [(ngModel)]="addItem.itemNo">
+	        </div>
+          </div>
+          <div class='col s4'>
+          	<label for="itemname">Item Name:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Item Name" name="itemName" [(ngModel)]="addItem.itemName">
+	        </div>
+          </div>
+           <div class='col s4'>
+          	<label for="itemtype">Item Type:</label>
+	        <div class="input-group">	         
+	          <select [(ngModel)]="selectedTax" name="seleTax" class="selGroup" (ngModelChange)="onTaxChange()">
+	          	<option value="">--Select Tax Group--</option>
+			  	<option *ngFor="let tax of allTaxesArr" [ngValue]="tax">{{tax.tax_type}}</option>
+			</select>
+	        </div>
+          </div>
+        </div>
+        <br/>        
+        <div class="row">
+         <div class='col col-2'>
+          	<label for="itemqty">Qty:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Qty" name="itemQty" type="number" [(ngModel)]="addItem.itemQty">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="itemprice">Price(Rs.):</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" placeholder="Price" name="itemPric" [(ngModel)]="addItem.itemPrice">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="itemdiscount">Discount:</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" placeholder="Discount" name="itemdisc" [(ngModel)]="addItem.itemDiscount">
+	        </div>
+	        <p class="itemPercent">%</p>
+          </div>
+           <div class='col col-2'>
+          	<label for="baceprice">Bace Price:</label>
+	        <div class="input-group">
+	          <input class="form-control" [disabled]="true" type="number" placeholder="Price" name="itembasePri" [(ngModel)]="addItem.itemBasPrice">
+	        </div>	       
+          </div>
+          <div class='col col-4'>
+          	<label for="descrip">Description</label>
+	        <div class="input-group">
+	          <textarea class="form-control" [(ngModel)]="addItem.itemDesc" placeholder="Item Number" name="desc"></textarea>
+	        </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row selectedTax">
+        	<div class="col col-6">
+	        	<table class="table" *ngIf="selectedTax">
+					  <thead>
+					    <tr>
+					      <th scope="col">C GST</th>
+					      <th scope="col">S GST</th>
+					      <th scope="col">Tax</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+							<td>{{addItem.TaxApplied.cgst|number:'1.2-2'}}</td>
+							<td>{{addItem.TaxApplied.sgst |number:'1.2-2'}}</td>
+							<td class="tax-radio">		
+								<label class="radio-inline">
+							      <input type="radio" name="tax">Include
+							    </label>
+							    <label class="radio-inline">
+							      <input type="radio" name="tax">Exclude
+							    </label>
+							</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+        </div>       
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+  	  <img src="assets/images/search.png" title="Search for Id" (click)="searchId(addItem.itemNo)" *ngIf="!isValidItemNo">  	  
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="addIem()" *ngIf="isValidItemNo">Add</button>
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="modal.close()">Close</button>      
+  </div>
+</ng-template>

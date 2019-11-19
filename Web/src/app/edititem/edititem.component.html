@@ -1,0 +1,180 @@
+<div class="limiter">
+	<div class="container-billItem100">		
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">		    		
+		    		<div class="backButtonCss1">
+		    			<img src="./assets/images/list1.png">
+		    			<ul class="dropdown-items">		
+		    				<li (click)="goToDashBor()">Dashboard</li>
+		    				<li (click)="showOldStock(content2)">Former Stock</li>
+		    			</ul>		    			
+		    		</div>
+		         	<div class="box-part text-center">
+			            <div class="project prjHed">
+		                    <span class="headerDashB">Edit Item</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>
+		    <div class="row">
+		    	<div class="col col-3">
+		    		<!-- <label for="itemid">Search Item #:</label> -->
+			        <div class="input-group">
+			            <input type="text"  autocomplete="off" class="form-control" placeholder="Goods #" name="itemNo" [(ngModel)]="searchItemId">
+			            <span class="input-group-btn">
+					    <button (click)="searchItemDet()" title="Search for Goods" class="btn btn-default iconClass" type="submit">
+					        <i class="fa fa-search"></i>
+					    </button>
+					  </span>
+			        </div>
+		        </div>	
+		    </div>
+		    <div>
+				<table class="table" *ngIf="addAllItems.length">
+				  <thead>
+				    <tr>
+				      <th scope="col">S.No</th>
+				      <th scope="col">Item #</th>
+				      <th scope="col">Goods Name</th>
+				      <th scope="col">Qty</th>
+				      <th scope="col">Price</th>
+				      <th scope="col">Discount</th>
+				      <th scope="col">Tax</th>
+				      <th scope="col">HSN Code</th>
+				    </tr>
+				  </thead>
+				  <tbody class="table-dark">
+				    <tr *ngFor="let item of addAllItems;index as i" [ngClass]="{'table-warning':i%2==0}" class="hover-row" (click)="editItemDet(item,content)">
+						<td>{{i+1}}</td>
+						<td>{{item.P_ID}}</td>
+						<td>{{item.P_Name}}</td>
+						<td>{{item.P_Qty}}</td>
+						<td >{{item.P_Price|number :'0.2-2'}}</td>
+						<td *ngIf="item.P_discount==0">--</td>
+						<td *ngIf="item.P_discount!=0">{{item.P_discount}}%</td>
+						<td *ngIf="item.P_taxIncluded==1">Included</td>
+						<td *ngIf="item.P_taxIncluded==0">Excluded</td>
+						<td>{{item.P_Hsn_Code}}</td>
+					</tr>				   
+				  </tbody>
+				</table>
+			</div>			
+			<div class="row" *ngIf="!addAllItems.length">
+				<div class="col col-12">
+					<h3>No items to show...</h3>
+				</div>
+			</div>   
+		</div>
+	</div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Modify Item</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>   
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+          <div class='col col-3'>
+          	<label for="dateOfBirth">Item #:</label>
+	        <div class="input-group">
+	          <input type="text" class="form-control" placeholder="Item Number" name="itemNo" [disabled]="true" [(ngModel)]="editItem.P_ID">
+	        </div>
+          </div>
+          <div class='col col-3'>
+          	<label for="dateOfBirth">Goods Description:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="Item Name" name="itemName" [(ngModel)]="editItem.P_Name">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="hsncode">HSN Code:</label>
+	        <div class="input-group">
+	          <input class="form-control" placeholder="HSN Code" name="hsncode" [(ngModel)]="editItem.P_Hsn_Code">
+	        </div>
+          </div>
+           <div class='col col-3'>
+	          	<label for="itemtype">Item Type:</label>
+		        <div class="input-group">	         
+		          <select [(ngModel)]="selectedTax" name="seleTax" class="selGroup" (ngModelChange)="onTaxChange()">
+		          	<option value="">--Select Tax Group--</option>
+				  	<option *ngFor="let tax of allTaxesArr" [ngValue]="tax">{{tax.tax_type}}</option>
+				</select>
+		        </div>
+	        </div>
+        </div>       
+        <div class="row">
+         <div class='col col-2'>
+          	<label for="dateOfBirth">Qty:</label>
+	        <div class="input-group">
+	          <input class="form-control" min="1" type="number" placeholder="Item Qty" name="itemQty" [(ngModel)]="editItem.P_Qty">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="itemPric">Price(Rs.):</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" autocomplete="off" placeholder="Item Price" name="itemPric" (ngModelChange)="calTotAmount()" [(ngModel)]="editItem.P_Price">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="discount">Discount(%)</label>
+	        <div class="input-group">
+	          <input class="form-control" min="0" type="number" [(ngModel)]="editItem.P_discount" (ngModelChange)="calTotAmount()" placeholder="Discount" name="discount">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="baseprice">Base Price</label>
+	        <div class="input-group">
+	          <input class="form-control" [disabled]="true" type="number" [(ngModel)]="editItem.P_basePrice" placeholder="Base price" name="baseprice">
+	        </div>
+          </div>          
+        </div>       
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="upadeItemDet()" >Save</button>
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="deleteItem()" >Delete</button>
+		<!-- <button type="button" class="btn btn-lg btn-outline-dark" (click)="modal.close()">Close</button> -->      
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Former Items</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>   
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+       		<div class="col col-12">
+	        	<table class="table">
+					  <thead>					   
+					    <tr>
+					    	<th scope="col" >S.No</th>
+						    <th scope="col" >Goods #</th>
+						    <th scope="col" >Goods Name</th>
+						    <th scope="col">Available Qty</th>
+					    </tr>					   
+					  </thead>
+					  <tbody class="table-dark">
+					    <tr *ngFor="let item of oldStockItems;index as i" [ngClass]="{'table-warning':i%2==0}" >
+							<td>{{i+1}}</td>
+							<td>{{item.P_ID}}</td>
+							<td>{{item.P_Name}}</td>
+							<td>{{item.P_Qty}}</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+       </div>
+      </div>   
+    </form>
+  </div>  
+</ng-template>

@@ -1,0 +1,436 @@
+<div class="container page1">	
+	<div class="row headRow borderRnLeft">
+    	<div class="col col-12 printHeader"> 
+            <span class="pheader1">Aswa India FAB</span>
+            <span class="pheader2">Free Styles</span>
+            <span class="pheader3">Original For Buyer</span>
+        </div>	
+    </div>
+    <div class="row headRow2 borderRnLeft">
+    	<div class="col col-12 printHeader2"> 
+            <span class="pheader1">{{totBillInfo.shopInfo.shop_no}}&nbsp;&nbsp;{{totBillInfo.shopInfo.shop_street}}</span>
+            <span class="pheader2">Tel:+91-{{totBillInfo.shopInfo.shop_ph_num}}</span>
+            <span class="pheader3">GSTIN:{{totBillInfo.shopInfo.shop_gstin_num}}</span>
+        </div>	
+    </div>
+    <div class="row headEmptyRow" 
+     style="border-right:black 1px solid;border-left:black 1px solid;border-top:black 1px solid;border-bottom:black 1px solid;">
+    	<div class="col col-12">
+        </div>	
+    </div>
+    <div class="row headRow3 borderRnLeft">
+    	<div class="col col-12"> 
+            <span class="pheader1">Tax Invoice</span>
+        </div>	
+    </div>
+    <div class="row custDetRow borderTop borderRnLeft">
+    	<div class="col col-8"> 
+            <span class="pheader1">Customer Name & Address</span>
+            <span class="pheader2">{{totBillInfo.custDet.custName}}</span>
+            <span class="pheader3">{{totBillInfo.custDet.custMobile}}</span>
+            <hr class="hrclass1">
+            <hr class="hrclass2">
+        </div>
+        <div class="col col-2 billDetCol">
+        	<span>Bill No</span>
+        	<span>Date</span>
+        	<span>Pay Mode</span>
+        </div>	
+        <div class="col col-2 billDetCol2">
+        	<span>:&nbsp;&nbsp;{{totBillInfo.billId}}</span>
+        	<span>:&nbsp;&nbsp;{{totBillInfo.billdate}}</span>
+        	<span>:&nbsp;&nbsp;Cash-bill</span>
+        </div>
+    </div>
+    <div class="row">
+    	<table class="table">
+			<thead>
+				<tr class="thead">
+		            <th rowspan="2" >S.No</th>
+		            <th rowspan="2" >CODE</th>
+		            <th rowspan="2" >Description of Goods</th>
+		            <th rowspan="2" >HSN Code</th>		           
+		            <th rowspan="2" >Qty</th>
+		            <th rowspan="2" >Rate</th>
+		            <th rowspan="2" >Amount</th>
+		            <th rowspan="2" >Discount</th>
+		            <th rowspan="2" >Taxable Value</th>
+		            <th colspan="2" >CGST</th>
+		            <th colspan="2" >SGST</th>
+		            <th rowspan="2" >Total</th>
+		        </tr>
+		        <tr class="thead">
+		            <th >Rate</th>
+		            <th >Amount</th>
+		            <th >Rate</th>
+		            <th >Amount</th>           
+		        </tr>		       
+			</thead>
+			<tbody>				
+		        <tr *ngFor="let item of billItems;index as i">
+		            <td >{{i+1}}</td>
+		            <td >{{item.P_ID}}</td>
+		            <td >{{item.P_Name}}</td>
+		            <td >{{item.P_Hsn_Code}}</td>		           
+		            <td >{{item.Req_P_Qty}}</td>
+		            <td>{{item.P_Price |number :'0.2-2'}}</td>
+		            <td >{{item.Amount|number :'0.2-2'}}</td>
+		            <td >{{item.disAmount |number :'0.2-2'}}</td>
+		            <td >{{item.taxableVal|number :'0.2-2'}}</td>
+		            <td >{{item.cgst}}</td>
+		            <td >{{item.cgstAmount| number :'0.2-2' }}</td>
+		            <td >{{item.sgst}}</td>
+		            <td>{{item.sgstAmount | number :'0.2-2' }}</td>
+		            <td>{{item.itemTotAmt |number :'0.2-2'}}</td>     
+		        </tr>		       
+		        <tr *ngIf="billItems.length<5">
+		        	<td ></td>
+		            <td class="emptyValArr">{{emptyval}}</td>            
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>		           
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr *ngIf="billItems.length<5">		            
+		            <td ></td>
+		            <td ></td>
+		            <td class="emptyValArr">{{emptyval}}</td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>		            
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr >		           
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td class="emptyValArr">{{emptyval}}</td>
+		            <td ></td>
+		            <td></td>
+		            <td ></td>		         
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr >		           
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td >{{emptyval}}</td>
+		            <td ></td>
+		            <td></td>
+		            <td ></td>		         
+		            <td ></td>
+		            <td ></td>
+		            <td class="emptyValArr"></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr >
+		            <td colspan="4" class="bglightGreen"></td> 
+		            <td >{{totBillInfo.totItemQty}}</td>
+		            <td></td>
+		            <td >{{totBillInfo.totAmount | number :'0.2-2'}}</td>
+		            <td >{{totBillInfo.totItemDisAmount}}</td>
+		            <td >{{totBillInfo.totTaxableAmount | number :'0.2-2'}}</td>
+		            <td ></td>
+		            <td >{{totBillInfo.totCgstAmount}}</td>
+		            <td ></td>
+		            <td>{{totBillInfo.totSgstAmount}}</td>
+		            <td>{{totBillInfo.totItemsAmount | number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>
+		            <td colspan="9" class="bglightGreen"></td>
+		            <td colspan="4" class="alignLeft">Total amount before Tax</td>
+		            <td>{{totBillInfo.totTaxableAmount | number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>
+		            <td *ngIf="!totBillInfo.hasSpecialDis" colspan="9" rowspan="5"></td>
+		            <td *ngIf="totBillInfo.hasSpecialDis" colspan="9" rowspan="7"></td>		           
+		            <td colspan="4" class="alignLeft">Add:CGST</td>
+		            <td>{{totBillInfo.totCgstAmount}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Add:SGST</td>
+		            <td>{{totBillInfo.totSgstAmount}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Total Tax Amount</td>
+		            <td>{{(totBillInfo.totCgstAmount+totBillInfo.totSgstAmount)| number :'0.2-2'}}</td>
+		        </tr>
+		        <tr *ngIf="totBillInfo.hasSpecialDis">
+		            <td colspan="4" class="alignLeft">Special Discount</td>
+		            <td>{{totBillInfo.specialDisVal}}%</td>
+		        </tr>
+		        <tr *ngIf="totBillInfo.hasSpecialDis">
+		            <td colspan="4" class="alignLeft">Discount Amount</td>
+		            <td>{{totBillInfo.specialDisAmount| number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Round of Adjustment</td>
+		            <td>{{totBillInfo.roundValue| number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Total amount after Tax</td>
+		            <td>{{totBillInfo.roundAmount| number :'0.2-2'}}</td>
+		        </tr>		        
+		        <tr>
+		        	<td colspan="6" rowspan="4" class="bglightGreen"></td>
+		        	<td colspan="3" rowspan="3" ><p class="rotate">Cash paid seal</p></td>
+		        	<td colspan="4" class="bglightGreen alignLeft">GST on reverse charges</td>
+		        	<td>0.00</td>
+		        </tr>
+		        <tr>        	
+		        	<td colspan="5" ><br/>Certified that the particulars given above <br/>are true and correct<br/><br/> </td>
+		        </tr>
+		        <tr>        	
+		        	<td colspan="6"	rowspan="2">For Free Styles<br/><br/><br/><br/>
+		        	 Authorised Signature</td>
+		        </tr>
+		        <tr> <td colspan="3">Common Seal</td>
+
+		        </tr>	        		        
+		    </tbody>
+		</table>
+    </div>
+</div>
+
+<div class="container page2" style="margin-top: 60px;">	
+	<div class="row headRow borderRnLeft">
+    	<div class="col col-12 printHeader"> 
+            <span class="pheader1">Aswa India FAB</span>
+            <span class="pheader2">Free Styles</span>
+            <span class="pheader3">Duplicate Copy</span>
+        </div>	
+    </div>
+    <div class="row headRow2 borderRnLeft">
+    	<div class="col col-12 printHeader2"> 
+            <span class="pheader1">{{totBillInfo.shopInfo.shop_no}}&nbsp;&nbsp;{{totBillInfo.shopInfo.shop_street}}</span>
+            <span class="pheader2">Tel:+91-{{totBillInfo.shopInfo.shop_ph_num}}</span>
+            <span class="pheader3">GSTIN:{{totBillInfo.shopInfo.shop_gstin_num}}</span>
+        </div>	
+    </div>
+    <div class="row headEmptyRow" 
+     style="border-right:black 1px solid;border-left:black 1px solid;border-top:black 1px solid;border-bottom:black 1px solid;">
+    	<div class="col col-12">
+        </div>	
+    </div>
+    <div class="row headRow3 borderRnLeft">
+    	<div class="col col-12"> 
+            <span class="pheader1">Tax Invoice</span>
+        </div>	
+    </div>
+    <div class="row custDetRow borderTop borderRnLeft">
+    	<div class="col col-8"> 
+            <span class="pheader1">Customer Name & Address</span>
+            <span class="pheader2">{{totBillInfo.custDet.custName}}</span>
+            <span class="pheader3">{{totBillInfo.custDet.custMobile}}</span>
+            <hr class="hrclass1">
+            <hr class="hrclass2">
+        </div>
+        <div class="col col-2 billDetCol">
+        	<span>Bill No</span>
+        	<span>Date</span>
+        	<span>Pay Mode</span>
+        </div>	
+        <div class="col col-2 billDetCol2">
+        	<span>:&nbsp;&nbsp;{{totBillInfo.billId}}</span>
+        	<span>:&nbsp;&nbsp;{{totBillInfo.billdate}}</span>
+        	<span>:&nbsp;&nbsp;Cash-bill</span>
+        </div>
+    </div>
+    <div class="row">
+    	<table class="table">
+			<thead>
+				<tr class="thead">
+		            <th rowspan="2" >S.No</th>
+		            <th rowspan="2" >CODE</th>
+		            <th rowspan="2" >Description of Goods</th>
+		            <th rowspan="2" >HSN Code</th>		           
+		            <th rowspan="2" >Qty</th>
+		            <th rowspan="2" >Rate</th>
+		            <th rowspan="2" >Amount</th>
+		            <th rowspan="2" >Discount</th>
+		            <th rowspan="2" >Taxable Value</th>
+		            <th colspan="2" >CGST</th>
+		            <th colspan="2" >SGST</th>
+		            <th rowspan="2" >Total</th>
+		        </tr>
+		        <tr class="thead">
+		            <th >Rate</th>
+		            <th >Amount</th>
+		            <th >Rate</th>
+		            <th >Amount</th>           
+		        </tr>		       
+			</thead>
+			<tbody>				
+		        <tr *ngFor="let item of billItems;index as i">
+		            <td >{{i+1}}</td>
+		            <td >{{item.P_ID}}</td>
+		            <td >{{item.P_Name}}</td>
+		            <td >{{item.P_Hsn_Code}}</td>		           
+		            <td >{{item.Req_P_Qty}}</td>
+		            <td>{{item.P_Price |number :'0.2-2'}}</td>
+		            <td >{{item.Amount|number :'0.2-2'}}</td>
+		            <td >{{item.disAmount |number :'0.2-2'}}</td>
+		            <td >{{item.taxableVal|number :'0.2-2'}}</td>
+		            <td >{{item.cgst}}</td>
+		            <td >{{item.cgstAmount| number :'0.2-2' }}</td>
+		            <td >{{item.sgst}}</td>
+		            <td>{{item.sgstAmount | number :'0.2-2' }}</td>
+		            <td>{{item.itemTotAmt |number :'0.2-2'}}</td>     
+		        </tr>		       
+		        <tr *ngIf="billItems.length<5">
+		        	<td ></td>
+		            <td class="emptyValArr">{{emptyval}}</td>
+		            
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>		           
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr *ngIf="billItems.length<5">		            
+		            <td ></td>
+		            <td ></td>
+		            <td class="emptyValArr">{{emptyval}}</td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>		            
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr >		           
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td class="emptyValArr">{{emptyval}}</td>
+		            <td ></td>
+		            <td></td>
+		            <td ></td>		         
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr >		           
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td ></td>
+		            <td >{{emptyval}}</td>
+		            <td ></td>
+		            <td></td>
+		            <td ></td>		         
+		            <td ></td>
+		            <td ></td>
+		            <td class="emptyValArr"></td>
+		            <td ></td>
+		            <td></td>
+		            <td></td>		            
+		        </tr>
+		        <tr >
+		            <td colspan="4" class="bglightGreen"></td> 
+		            <td >{{totBillInfo.totItemQty}}</td>
+		            <td></td>
+		            <td >{{totBillInfo.totAmount | number :'0.2-2'}}</td>
+		            <td >{{totBillInfo.totItemDisAmount}}</td>
+		            <td >{{totBillInfo.totTaxableAmount | number :'0.2-2'}}</td>
+		            <td ></td>
+		            <td >{{totBillInfo.totCgstAmount}}</td>
+		            <td ></td>
+		            <td>{{totBillInfo.totSgstAmount}}</td>
+		            <td>{{totBillInfo.totItemsAmount | number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>
+		            <td colspan="9" class="bglightGreen"></td>
+		            <td colspan="4" class="alignLeft">Total amount before Tax</td>
+		            <td>{{totBillInfo.totTaxableAmount | number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>
+		            <td *ngIf="!totBillInfo.hasSpecialDis" colspan="9" rowspan="5"></td>
+		            <td *ngIf="totBillInfo.hasSpecialDis" colspan="9" rowspan="7"></td>		           
+		            <td colspan="4" class="alignLeft">Add:CGST</td>
+		            <td>{{totBillInfo.totCgstAmount}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Add:SGST</td>
+		            <td>{{totBillInfo.totSgstAmount}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Total Tax Amount</td>
+		            <td>{{(totBillInfo.totCgstAmount+totBillInfo.totSgstAmount)| number :'0.2-2'}}</td>
+		        </tr>
+		        <tr *ngIf="totBillInfo.hasSpecialDis">
+		            <td colspan="4" class="alignLeft">Special Discount</td>
+		            <td>{{totBillInfo.specialDisVal}}%</td>
+		        </tr>
+		        <tr *ngIf="totBillInfo.hasSpecialDis">
+		            <td colspan="4" class="alignLeft">Discount Amount</td>
+		            <td>{{totBillInfo.specialDisAmount| number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Round of Adjustment</td>
+		            <td>{{totBillInfo.roundValue| number :'0.2-2'}}</td>
+		        </tr>
+		        <tr>		            		           
+		            <td colspan="4" class="alignLeft">Total amount after Tax</td>
+		            <td>{{totBillInfo.roundAmount| number :'0.2-2'}}</td>
+		        </tr>		        
+		        <tr>
+		        	<td colspan="6" rowspan="4" class="bglightGreen"></td>
+		        	<td colspan="3" rowspan="3" ><p class="rotate">Cash paid seal</p></td>
+		        	<td colspan="4" class="bglightGreen alignLeft">GST on reverse charges</td>
+		        	<td>0.00</td>
+		        </tr>
+		        <tr>        	
+		        	<td colspan="5" ><br/>Certified that the particulars given above <br/>are true and correct<br/><br/> </td>
+		        </tr>
+		        <tr>        	
+		        	<td colspan="6"	rowspan="2">For Free Styles<br/><br/><br/><br/>
+		        	 Authorised Signature</td>
+		        </tr>
+		        <tr> <td colspan="3">Common Seal</td>
+
+		        </tr>	        		        
+		    </tbody>
+		</table>
+    </div>
+ </div>

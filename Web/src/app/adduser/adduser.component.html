@@ -1,0 +1,40 @@
+<div class="limiter">
+	<div class="container-billItem100">		
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">
+		    	 	<img src="./assets/images/back.png" class="backButtonCss" title="Dashboard" (click)="goToDashBor();">
+		         	<div class="box-part text-center">
+			            <div class="project prjHed"> 
+		                    <span class="headerDashB">Add User</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>
+		    <div class="row addUserTitle">
+		    	<div class="col col-12">
+		    		<span>User Details</span>
+		    	</div>
+		    </div>
+		    <div class="row userDetRow">
+	          <div class='col col-6'>
+	          	<label for="dateOfBirth">User Name</label>
+		        <div class="input-group">
+		          <input type="text" class="form-control" placeholder="User Name" name="itemNo" [(ngModel)]="addUser.userName">
+		        </div>
+	          </div>
+	          <div class='col col-6'>
+	          	<label for="dateOfBirth">Password</label>
+		        <div class="input-group">
+		          <input class="form-control" autocomplete="off" placeholder="Password" name="itemName" type="text" [(ngModel)]="addUser.passWord">
+		        </div>
+	          </div>
+	        </div>
+		    <div class="row">
+		    	<div class="col col-12 addItemClass">		    		
+		    		<img src="assets/images/save.png" title="Send to Server" (click)="saveUser()" >		    		
+		    	</div>
+		    </div>  
+		</div>
+	</div>
+</div>

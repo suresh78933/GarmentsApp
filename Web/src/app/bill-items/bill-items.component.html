@@ -1,0 +1,283 @@
+<div class="limiter">
+	<div class="container-billItem100">
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">
+		    		<div class="backButtonCss1">
+		    			<img src="./assets/images/list1.png">
+		    			<ul class="dropdown-items">		
+		    				<li (click)="logOut()">Log Out</li>
+		    				<li (click)="cPWord(cpword)">Change Password</li>
+		    				<li *ngIf="!billItems.length"  (click)="showOldStock(content2)">Former Stock</li>
+		    			</ul>		    			
+		    		</div>
+		         	<div class="box-part text-center">
+			            <div class="project prjHed">  
+		                    <span class="headerDashB">Bill Items</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>
+		    <div>
+				<table class="table" *ngIf="billItems.length&&!customerInfo" >
+				  <thead>
+				    <tr>
+				      <th scope="col">S.No</th>
+				      <th scope="col">Item #</th>
+				      <th scope="col">Name</th>				      
+				      <th scope="col">Qty</th>
+				      <th scope="col">Price</th>
+				      <th scope="col">Amount</th>
+				      <th scope="col">Discount</th>
+				      <th scope="col">Taxable Value</th>
+				      <th scope="col">All Taxes</th>
+				      <th scope="col">Total</th>				      
+				    </tr>
+				  </thead>
+				  <tbody class="table-dark">
+				    <tr *ngFor="let item of billItems;index as i" [ngClass]="{'table-warning':i%2==0}" (click)="open(content,item)" class="hover-row">
+						<td>{{i+1}}</td>
+						<td>{{item.P_ID}}</td>
+						<td>{{item.P_Name}}</td>						
+						<td>{{item.Req_P_Qty}}</td>						
+						<td>{{item.P_Price |number :'0.2-2'}}</td>
+						<td>{{item.Amount |number :'0.2-2'}}</td>
+						<td>{{item.disAmount|number :'0.2-2'}}</td>
+						<td>{{item.taxableVal |number :'0.2-2'}}</td>
+						<td>{{item.cgstAmount+item.sgstAmount|number :'0.2-2'}}</td>
+						<td>{{item.itemTotAmt |number :'0.2-2'}}</td>		
+					</tr>
+					<tr>
+				      <td class="bliItemLastrowtd" scope="col" colspan="9">Total (Rs.) :</td>
+				      <td scope="col">{{billAmount |number :'0.2-2'}}</td>	      
+				    </tr>				   
+				    <tr class="bilItemLastrow hover-row">
+				      <td class="bliItemLastrowtd" scope="col" colspan="10" (click)="fnSpecialDisco()">Special Discount</td>	      
+				    </tr>			   
+				  </tbody>
+				</table>
+			</div>
+			<div class="row">
+				<div class="col col-6">
+					
+				</div>
+				<div class='col col-6' *ngIf="!customerInfo&&hasSpecialDis">
+	          	<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">Amount</th>
+				      <th scope="col">Special Discount</th>
+				      <th scope="col">Final Amount</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					<tr class="table-warning ">
+				      <td scope="col">{{totalBillItemsInfo.totItemsAmount |number :'0.2-2'}}</td>
+				      <td scope="col" class="rangeWidth"><input type="range" min="0" max="5" value="1" class="slider" name="specialDisVal" (change)="calSpecialDisValue()"  [(ngModel)]="totalBillItemsInfo.specialDisVal">&nbsp;&nbsp;{{totalBillItemsInfo.specialDisVal}}%</td>
+				      <td scope="col">{{totalBillItemsInfo.specialDisAmount|number :'0.2-2'}}</td>	      
+				    </tr>				   			   
+				  </tbody>
+				</table>
+	          </div>
+			</div>
+			<div class="row" *ngIf="!billItems.length">
+				<div class="col col-12">
+					<h3>No items added....</h3>
+				</div>
+			</div>
+			<div class="row" *ngIf="customerInfo">
+	          <div class='col col-2'>
+	          	<label for="custName">Customer Name:</label>
+		        <div class="input-group">
+		            <input type="text" autocomplete="off" class="form-control" placeholder="Customer Name" name="custName" [(ngModel)]="custDet.custName">
+		        </div>
+	          </div>
+	          <div class='col col-3'>
+	          	<label for="custMobile">Mobile #:</label>
+		        <div class="input-group">
+		          <input class="form-control" type="number" maxlength="10" placeholder="Mobile Number" name="custMobile" [(ngModel)]="custDet.custMobile">
+		        </div>
+	          </div>
+	          <div class='col col-7'>
+	          	<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">Bill Amount</th>
+				      <th scope="col">Round Amount</th>
+				      <th scope="col">Final Amount</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					<tr class="table-warning">
+				      <td scope="col">{{totalBillItemsInfo.specialDisAmount|number :'0.2-2'}}</td>
+				      <td scope="col" class="rangeWidth">
+			      		<input type="range" min="0" max="10" value="1" class="slider" name="roundVal" (change)="calRoundValue()" [(ngModel)]="totalBillItemsInfo.roundVal">&nbsp;&nbsp;Rs.{{(totalBillItemsInfo.roundVal+decVal) |number :'0.2-2'}}</td>
+				      <td scope="col">{{totalBillItemsInfo.roundAmount|number :'0.2-2'}}</td>	      
+				    </tr>				   			   
+				  </tbody>
+				</table>
+	          </div>
+	        </div>
+		    <div class="row">
+		    	<div class="col col-12 addItemClass">
+		    		<img src="assets/images/print-out.png" title="Print Bill" (click)="printBill()" *ngIf="customerInfo">
+		    		<img src="assets/images/go-back.png" title="Back" (click)="showBillItems()" *ngIf="customerInfo">
+		    		<img src="assets/images/continue.jpg" title="Continue" (click)="fillExtradet()" *ngIf="!customerInfo">
+		   			<img src="assets/images/additem.png" title="Add item" (click)="open(content)" *ngIf="showAddSym">
+		    	</div>
+		    </div>    
+		</div>
+	</div>		
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">{{modalTit}} Item</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+          <div class='col col-4'>
+          	<label for="itemNo">Item #:</label>
+	        <div class="input-group">
+	            <input type="text" autocomplete="off" class="form-control" placeholder="Item Number" name="number" [disabled]="itemDetFound" [(ngModel)]="addItem.P_ID">
+	            <span class="input-group-btn">
+					<button [disabled]="itemDetFound" (click)="searchId(addItem.P_ID)" title="Search for Id" class="btn btn-default iconClass" type="submit">
+					        <i class="fa fa-search"></i>
+					</button>
+			    </span>
+	        </div>
+          </div>
+          <div class='col col-4'>
+          	<label for="itemname">Item Name:</label>
+	        <div class="input-group">
+	          <input class="form-control" [disabled]="true" placeholder="Item Name" name="name" [(ngModel)]="addItem.P_Name">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="price">Price(Rs.):</label>
+	        <div class="input-group">
+	          <input class="form-control" [(ngModel)]="addItem.P_Price" [disabled]="true" placeholder="Price" name="price">
+	        </div>
+          </div>
+          <div class='col col-2'>
+          	<label for="baseprice">B Price(Rs.):</label>
+	        <div class="input-group">
+	          <input class="form-control" [(ngModel)]="addItem.P_basePrice" [disabled]="true" placeholder="B Price" name="baseprice">
+	        </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+         <div class='col col-2'>
+          	<label for="availableitemqty">Avl Qty:</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" [(ngModel)]="addItem.P_Qty" [disabled]="true" placeholder="Qty" name="availableitemqty">
+	        </div>
+          </div>          
+          <div class='col col-2'>
+          	<label for="itemqty">Req Qty:</label>
+	        <div class="input-group">
+	          <input class="form-control" type="number" [(ngModel)]="addItem.Req_P_Qty" [disabled]="!itemDetFound" placeholder="Qty" name="itemqty">
+	        </div>
+          </div>
+          <div class="col col-4" *ngIf="itemDetFound">
+          	<label for="tax">Tax:</label>
+	        <div class="input-group taxFont">
+	          	<label class="radio-inline">
+			       <input type="radio" [value]="true" [(ngModel)]="taxIncluded" name="tax" (click)="checkTaxInclude('true')">Include
+			    </label>
+			    <label class="radio-inline">
+			      <input type="radio" [value]="false" [(ngModel)]="taxIncluded" name="tax" (click)="checkTaxInclude('false')">Exclude
+			    </label>
+		    </div>
+          </div>
+          <div class='col col-4 buttonCol'>
+          	<button type="button" class="btn btn-lg btn-outline-dark" (click)="addItemToBill()" *ngIf="itemDetFound">{{modalTit}}</button>
+          	<button type="button" class="btn btn-lg btn-outline-dark" *ngIf="addItem.isDelete" (click)="deleteItemFromBill(addItem.P_ID)">Delete</button>
+          </div>
+        </div>       
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #cpword let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Change Password</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>   
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+          <div class='col s6'>
+          	<label for="itemNo">Old Password :</label>
+	        <div class="input-group">
+	          <input type="password" class="form-control" placeholder="enter Old Password" name="number" [(ngModel)]="updPassWord.oldPwd">
+	        </div>
+          </div>
+          <div class='col s6'>
+          	<label for="itemname">New Password:</label>
+	        <div class="input-group">
+	          <input type="password" class="form-control"placeholder="Item Name" name="name" [(ngModel)]="updPassWord.newPwd" placeholder="Enter New Password">
+	        </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+         <div class='col col-6'>
+          	<label for="itemqty">Confirm new Password</label>
+	        <div class="input-group">
+	          <input class="form-control" type="password" [(ngModel)]="updPassWord.cnewPwd" placeholder="Confirm Passwrod" name="qty">
+	        </div>
+          </div>         
+          <div class='col col-6 buttonCol'>          	
+          	<button type="button" class="btn btn-lg btn-outline-dark" (click)="fnUpdPassWord()">Update</button>          	
+       		<!-- <button type="button" class="btn btn-lg btn-outline-dark" (click)="modal.close()">Close</button> -->
+          </div>
+        </div>       
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Former Items</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>   
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+       <div class="row">
+       		<div class="col col-12">
+	        	<table class="table">
+					  <thead>					   
+					    <tr>
+					    	<th scope="col" >S.No</th>
+						    <th scope="col" >Goods #</th>
+						    <th scope="col" >Goods Name</th>
+						    <th scope="col">Available Qty</th>
+					    </tr>					   
+					  </thead>
+					  <tbody class="table-dark">
+					    <tr *ngFor="let item of oldStockItems;index as i" [ngClass]="{'table-warning':i%2==0}" >
+							<td>{{i+1}}</td>
+							<td>{{item.P_ID}}</td>
+							<td>{{item.P_Name}}</td>
+							<td>{{item.P_Qty}}</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+       </div>
+      </div>   
+    </form>
+  </div>  
+</ng-template>

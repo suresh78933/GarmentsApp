@@ -1,0 +1,18 @@
+mat-dialog-container {
+	position: absolute;
+    top: 181px;
+    background: white;
+    width: 93%;
+    height: 49%;
+    left: 30px;
+}
+
+.custom-modalbox >  mat-dialog-container {
+    padding: 0px;
+    position: absolute;
+    top: 181px;
+    background: white;
+    width: 93%;
+    height: 49%;
+    left: 30px;
+}

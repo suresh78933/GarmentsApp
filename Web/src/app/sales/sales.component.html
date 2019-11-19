@@ -1,0 +1,210 @@
+<div class="limiter">
+	<div class="container-billItem100">		
+		<div class="container">		    
+		    <div class="row">
+		    	<div class="col col-12">		    	 	
+		    	 	<div class="backButtonCss1">
+		    			<img src="./assets/images/list1.png">
+		    			<ul class="dropdown-items">		
+		    				<li (click)="goToDashBor()">Dashboard</li>
+		    				<li (click)="resetBillId()">Reset Bill Id</li>
+		    				<!-- <li (click)="showOldStock(content2)">Former Stock</li> -->
+		    			</ul>		    			
+		    		</div>
+		         	<div class="box-part text-center">
+			            <div class="project prjHed">  
+		                    <span class="headerDashB">Sales</span>
+			            </div>
+		            </div>
+		        </div>	
+		    </div>
+		    <div class="row selectionRow">
+		    	<div class="col col-12">
+		    		<div class="box-part text-center">
+		    			<span [ngClass]="{'active':searchById === true, 'not-active':searchById === false}" (click)="sales('billId')">Search Bill</span>
+			    		<span [ngClass]="{'active':salesByDate === true, 'not-active':salesByDate === false}" (click)="sales('date')">By Date</span>	    	
+			    		<span [ngClass]="{'active':salesByEmp === true, 'not-active':salesByEmp === false}" (click)="sales('emp')">By Employee</span>
+		    		</div>
+		    	</div>
+		    </div>		   
+		    <div class="row form-group" *ngIf="salesByEmp||salesByDate">
+		    	<div class="col col-3">
+		    	    <label for="dp">{{dateStr}}</label>
+			    	<div class="input-group">			    	  
+				      <input class="form-control" placeholder="yyyy-mm-dd"
+				             name="dp" [(ngModel)]="salesQery.selectedFromDate" ngbDatepicker #d="ngbDatepicker">
+				      <div class="input-group-append">
+				        <button class="btn btn-outline-secondary calendar fa fa-calendar fa-lg" (click)="d.toggle()" type="button"></button>
+				      </div>
+				    </div>				   
+		    	</div>
+		    	<div class="col col-3" *ngIf="salesByDate">
+		    	    <label for="dpto">To Date</label>
+			    	<div class="input-group">			    	  
+				      <input class="form-control" placeholder="yyyy-mm-dd"
+				             name="dpto" [(ngModel)]="salesQery.selectedToDate" ngbDatepicker #d="ngbDatepicker">
+				      <div class="input-group-append">
+				        <button class="btn btn-outline-secondary calendar fa fa-calendar fa-lg" (click)="d.toggle()" type="button"></button>
+				      </div>
+				    </div>				   
+		    	</div>
+		    	<div class="col col-3" *ngIf="salesByEmp">
+		    	    <label for="selEmp">Employee</label>			   	
+				    <div class="input-group">	         
+			            <select [(ngModel)]="salesQery.selectedEmp" name="selEmp"class="selGroup">
+				          	<option value="">--Select Employee--</option>
+						  	<option *ngFor="let emp of allEmployees" [ngValue]="emp">{{emp.Emp_Name}}</option>
+					   </select>
+			        </div>				   
+		    	</div>
+		    	<div class="col col-3 seleCol">
+		    	   <button type="button" (click)="showReports();" class="btn btn-lg">Sales</button>
+		    	</div>		    	
+		    </div>
+		    <div class="row form-group" >
+		    	<div class="col col-3" *ngIf="searchById">
+		    		<label for="billNo">Search Bill #:</label>
+			        <div class="input-group">
+			            <input type="text"  autocomplete="off" class="form-control" placeholder="Bill Number" name="billNo" [(ngModel)]="salesQery.searchBillId">
+			            <span class="input-group-btn">
+						    <button (click)="searchBillDet()" title="Search for Bill" class="btn btn-default iconClass" type="submit">
+						        <i class="fa fa-search"></i>
+						    </button>
+					    </span>
+			        </div>
+		        </div>	
+		    </div>
+		    <div>
+				<table class="table" *ngIf="allBilldetails.length">
+				  <thead>
+				    <tr>
+				      <th scope="col" rowspan="2">S.No</th>
+				      <th scope="col" rowspan="2">Bill #</th>
+				      <th scope="col" colspan="2">Custmar Details</th>
+				      <th scope="col" rowspan="2">Bill Date</th>
+				      <th scope="col" rowspan="2">Emp Name</th>
+				      <th scope="col" rowspan="2">Bill Total</th>
+				      <th scope="col" rowspan="2">Special Discount</th>
+				    </tr>
+				    <tr>
+				      <th scope="col">Name</th>
+				      <th scope="col">Phone Number</th>
+				    </tr>
+				  </thead>
+				  <tbody class="table-dark">
+				    <tr *ngFor="let bill of allBilldetails;index as i" [ngClass]="{'table-warning':i%2==0}" class="hover-row" (click)="showBillDet(bill,content)">
+						<td>{{i+1}}</td>
+						<td>{{bill.Bill_Id}}</td>
+						<td>{{bill.Cust_Name}}</td>
+						<td>{{bill.Cust_Ph_Num}}</td>					
+						<td>{{bill.Bill_Date|date:'dd/MM/yyyy'}}</td>
+						<td>{{bill.Emp_Name}}</td>
+						<td >{{bill.Bill_Total|number :'0.2-2'}}</td>
+						<td *ngIf="bill.Special_Discount==0">--</td>
+						<td *ngIf="bill.Special_Discount!=0">{{bill.Special_Discount}}%</td>
+					</tr>				   
+				  </tbody>
+				</table>
+			</div>
+		 </div>
+	</div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">{{showBill.Bill_Id}} Details</h3>
+    <button type="button" class="close closeButt" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" title="Close">&times;</span>
+    </button>  
+  </div>
+  <div class="modal-body">
+  	<div class="row">
+  		<div class="col col-12">
+  			<span>Bill Details</span>
+  		</div>
+  	</div>
+    <div class="row">
+    	<div class="col col-12">
+        	<table class="table">
+				<thead>				    
+				    <tr>
+				    	<th scope="col">S.No</th>
+					    <th scope="col" >Custmar Name</th>
+					    <th scope="col">Phone Number</th>
+					    <th scope="col" >Bill Date</th>
+					    <th scope="col" >Emp Name</th>
+				    </tr>				  
+				</thead>
+				<tbody class="table-dark">
+				    <tr>
+						<td>1</td>							
+						<td>{{showBill.Cust_Name}}</td>
+						<td>{{showBill.Cust_Ph_Num}}</td>			
+						<td>{{showBill.Bill_Date|date:'dd/MM/yyyy'}}</td>
+						<td>{{showBill.Emp_Name}}</td>
+					</tr>								   
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+  		<div class="col col-12">
+  			<span>Amount Details</span>
+  		</div>
+  	</div>
+    <div class="row">
+    	<div class="col col-12">
+        	<table class="table">
+				<thead>				    
+				    <tr>
+				    	<th scope="col" >S.No</th>
+					    <th scope="col" >Bill Total</th>
+					    <th scope="col" >Special Discount</th>
+					    <th scope="col" >Round Amount</th>
+					    <th scope="col" >Final Amount</th>
+				    </tr>				   
+				</thead>
+				<tbody class="table-dark">
+				    <tr>
+						<td>1</td>
+						<td>{{showBill.Bill_Total|number :'0.2-2'}}</td>
+						<td *ngIf="showBill.Special_Discount==0">--</td>
+						<td *ngIf="showBill.Special_Discount!=0">{{showBill.Special_Discount}}%</td>
+						<td>{{showBill.Bill_Round_Amount|number :'0.2-2'}}</td>
+						<td>{{showBill.Bill_Final_Amount|number :'0.2-2'}}</td>
+					</tr>								   
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+  		<div class="col col-12">
+  			<span>Goods Details</span>
+  		</div>
+  	</div>
+	<div class="row">
+			<div class="col col-12">
+	        	<table class="table">
+					  <thead>					   
+					    <tr>
+					    	<th scope="col" >S.No</th>
+						    <th scope="col" >Goods #</th>
+						    <th scope="col" >Goods Name</th>
+						    <th scope="col">Sold Quantity</th>
+					    </tr>					   
+					  </thead>
+					  <tbody class="table-dark">
+					    <tr *ngFor="let item of showBill.billItems;index as i" [ngClass]="{'table-warning':i%2==0}" >
+							<td>{{i+1}}</td>
+							<td>{{item.P_ID}}</td>
+							<td>{{item.P_Name}}</td>
+							<td>{{item.Sold_Item_Qty}}</td>
+						</tr>								   
+					  </tbody>
+				</table>
+			</div>
+        </div>
+  </div>
+  <div class="modal-footer">		
+		<button type="button" class="btn btn-lg btn-outline-dark" (click)="deleteBillDet()" >Return Bill</button>		      
+  </div>
+</ng-template>

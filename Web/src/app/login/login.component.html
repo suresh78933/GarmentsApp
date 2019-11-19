@@ -1,0 +1,34 @@
+<div class="limiter">
+	<div class="container-login100">  
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-35 p-b-54">
+			<div class="login100-form1 validate-form1">
+				<span class="login100-form-title p-b-20">
+					Login
+				</span>
+				<div class="wrap-input100 validate-input m-b-23">
+					<span class="label-input100">User #</span>
+					<input class="input100" type="text" [(ngModel)]="LoginInfo.UserName" name="username" placeholder="User #">
+					<span class="focus-input100" data-symbol="&#xf206;"></span>
+				</div>				
+				<div class="wrap-input100 validate-input m-b-23">
+					<span class="label-input100">Password</span>
+					<input class="input100" type="password" name="pass" placeholder="Password" [(ngModel)]="LoginInfo.PassWord">
+					<span class="focus-input100" data-symbol="&#xf190;"></span>
+				</div>				
+				<div class="row fpCss">
+				    <div class="col float-right">
+						Forgot password?
+					</div>									
+				</div>				
+				<div class="container-login100-form-btn p-t-30">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn" (click)="validateLogin()">
+							Login
+						</button>
+					</div>					
+				</div>								
+			</div>
+		</div>	
+	</div>
+</div>
