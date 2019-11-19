@@ -1,0 +1,3 @@
+updateShopInfo:
+Info:{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column 'shop_addr1' in 'field list'","sqlState":"42S22","index":0,"sql":"update shop_info_tb set shop_name='Free Styles',shop_ph_num=7893317818,shop_addr1='undefined' ,shop_addr2='undefined' ,shop_addr3='undefined' ,shop_addr4='undefined', pincode=500015 where shop_id='FRSTY1'"}
+

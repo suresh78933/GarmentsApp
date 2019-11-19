@@ -1,0 +1,212 @@
+.container
+{
+	background-color: goldenrod;
+    margin-top: auto;
+    margin-bottom: auto;    
+}
+.admin-list-items
+{
+	border-radius: 0px;
+	width: 100%;
+    background: #fff;    
+    overflow: hidden;
+    background-color: darkseagreen;
+}
+
+.project {
+    margin-bottom: 30px;
+    vertical-align: top;
+    margin-right: 30px;
+    float: left;   
+    width:100%;
+}
+
+.prjHed{
+    margin-top: 20px;
+    background-color: hsl(230, 100%, 15%);
+}
+
+.backButtonCss
+{
+    position: absolute;
+    top: 20px;   
+}
+.backButtonCss:hover{
+    cursor: pointer;
+    background-color: white;
+}
+.project figure {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.project .headerDashB{
+	color: white;
+	font-weight: bold;    
+    font-size: 2em;
+}
+.project figure img {
+    width: 100%;
+}
+.btn-warning bnt-action{
+    margin: 0% 0% auto;    
+}
+
+figcaption .project-details {
+    display: block;
+    font-size: 16px;
+    /*line-height: 33px;*/
+    color: #000;
+    /*height: 27px;*/
+    width: 100%;
+    margin: 0 auto 5px auto;
+    /*margin-bottom: 5px;*/
+    overflow: hidden;
+}
+.project figure:hover figcaption {
+    background:#d81e05;
+}
+.project figure:hover figcaption .project-details {
+    color: #fff;
+}
+
+figcaption .project-price {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    font-size: 22px;
+    text-align: right;
+    margin-top: 8px;
+    letter-spacing: -1px;
+    -webkit-font-smoothing: antialiased;
+}
+
+figcaption .project-creator {
+    font-size: 13px;
+    color: #545454;
+    display: block;
+}
+
+figcaption .project-creator {
+    font-size: 13px;
+    color: #545454;
+    display: block;
+}
+
+.project figure .actions button {
+    padding: 13px 20px;
+    font-size: 16px;
+    top: 32%;
+    position: absolute;
+    left: 50%;
+    width: 90%;
+    margin-left: -45%;
+    line-height: 18px;
+    letter-spacing: 1px;
+} 
+
+.project figure:hover .actions {
+    background-color: rgba(38, 230, 5, 1);
+    font-size:1.4em;
+    color: black;
+    /*color:rgba(216,30,5,1);*/
+}
+
+.project figure .actions {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+
+    left:0;
+    right:0;
+    z-index: 1;
+    opacity: 1;
+    background-color: rgba(29,29,29,.5);
+    -ms-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    color: white;
+
+    padding:2%;
+    text-align:center;
+    
+    top: 40%;
+    font-size:2em;
+    font-weight:700;
+}
+
+
+@media (min-width: 992px) {
+    .project figure .actions {
+    top: 50%;
+    font-size:1.8em;
+    left:0;
+    right:0;
+    padding:2%;
+}
+}
+
+@media (min-width: 1200px) {
+    .project figure .actions {
+    left:0;
+    right:0;
+    top: 80%;
+    font-size:0.7em;
+    padding:2%;
+}
+}
+
+thead{ background-color: darkolivegreen; color: lawngreen; }
+.table-warning{  color: black; }
+.table{ text-align: center; }
+.hover-row:hover{ cursor: pointer; }
+.container-billItem100,.container-login100 { background-image: url('./../images/bg-01.jpg'); }
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.closeButt span{ font-size: 40px; }
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;   
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  overflow: hidden;
+}
+input:disabled{ cursor: default; }
+.slider:not([disabled]):hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+::-webkit-slider-runnable-track {
+    background: #ddd;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+   border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background: #4CAF50;
+  cursor: pointer;
+   box-shadow: -100vw 0 0 100vw dodgerblue;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+   border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}

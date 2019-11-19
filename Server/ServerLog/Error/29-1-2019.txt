@@ -1,0 +1,6 @@
+isValidAdmRUser:
+Info:{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column 'undefined' in 'where clause'","sqlState":"42S22","index":0,"sql":"select * from employee_tb where (Emp_Id='suresh0001' and Emp_Pword='suresh0001' and Emp_Mobile=undefined )"}
+
+isValidAdmRUser:
+Info:{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column 'undefined' in 'where clause'","sqlState":"42S22","index":0,"sql":"select * from employee_tb where (Emp_Id='suresh0001' and Emp_Pword='suresh0001' and Emp_Mobile=undefined )"}
+

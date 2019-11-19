@@ -1,0 +1,9 @@
+generatePDF:
+Info:{"code":"ER_DUP_ENTRY","errno":1062,"sqlMessage":"Duplicate entry 'FRS0601A001' for key 'PRIMARY'","sqlState":"23000","index":0,"sql":"INSERT INTO bill_details_tb(Bill_Id,Emp_Id,Cust_Name,Cust_Ph_Num,Bill_Date,Bill_Total,Special_Discount,Bill_Round_Amount,Bill_Final_Amount) VALUES ('FRS0601A001','suresh0001','fads',2045676545,'2019-1-6',989.01,0,0.01,989)"}
+
+generatePDF:
+Info:{"code":"ER_DUP_ENTRY","errno":1062,"sqlMessage":"Duplicate entry 'FRS0601A001' for key 'PRIMARY'","sqlState":"23000","index":0,"sql":"INSERT INTO bill_details_tb(Bill_Id,Emp_Id,Cust_Name,Cust_Ph_Num,Bill_Date,Bill_Total,Special_Discount,Bill_Round_Amount,Bill_Final_Amount) VALUES ('FRS0601A001','suresh0001','fads',2045676545,'2019-1-6',989.01,0,0.01,989)"}
+
+generatePDF:
+Info:{"code":"ER_BAD_NULL_ERROR","errno":1048,"sqlMessage":"Column 'Bill_Id' cannot be null","sqlState":"23000","index":0,"sql":"INSERT INTO bill_items_tb (Bill_Id,P_ID,Sold_Item_Qty,P_Name) VALUES (NULL, '124', 1, 'product 124')"}
+

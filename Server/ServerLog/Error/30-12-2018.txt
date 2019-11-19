@@ -1,0 +1,3 @@
+storeAllItems:
+Info:{"code":"ER_PARSE_ERROR","errno":1064,"sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''DF' at line 1","sqlState":"42000","index":0,"sql":"INSERT INTO ProductsTB (P_ID,P_Name,P_Qty,P_Price,P_Hsn_Code,tax_id,p_discount,p_taxIncluded,p_basePrice) VALUES ('128','product 128',10,551.5,'DF"}
+

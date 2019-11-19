@@ -1,0 +1,6 @@
+updateShopInfo:
+Info:{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column '29564554555FFGG' in 'field list'","sqlState":"42S22","index":0,"sql":"update shop_info_tb set shop_name='Free Styles',shop_ph_num=7893317818,shop_no='No-2123' ,shop_street='street1' ,shop_area='Area1' ,shop_city='Mysore', pincode=500015,shop_gstin_num=29564554555FFGG where shop_id='FRSTY1'"}
+
+updateShopInfo:
+Info:{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column '29564554555454GG' in 'field list'","sqlState":"42S22","index":0,"sql":"update shop_info_tb set shop_name='Free Styles',shop_ph_num=7893317818,shop_no='No-2123' ,shop_street='street1' ,shop_area='Area1' ,shop_city='Mysore', pincode=500015,shop_gstin_num=29564554555454GG where shop_id='FRSTY1'"}
+

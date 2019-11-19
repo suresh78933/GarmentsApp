@@ -1,0 +1,3 @@
+getBillItemsDet:
+Info:{"code":"ER_NO_SUCH_TABLE","errno":1146,"sqlMessage":"Table 'garmentsdb.bill_items_tbnatural' doesn't exist","sqlState":"42S02","index":0,"sql":"select * from bill_items_tbnatural join productstb where Bill_Id='FRS2612A001'"}
+

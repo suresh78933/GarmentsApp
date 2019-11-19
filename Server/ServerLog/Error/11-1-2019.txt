@@ -1,0 +1,6 @@
+generatePDF:
+Info:{"code":"ER_DUP_ENTRY","errno":1062,"sqlMessage":"Duplicate entry '0000024' for key 'PRIMARY'","sqlState":"23000","index":0,"sql":"INSERT INTO bill_details_tb(Bill_Id,Emp_Id,Cust_Name,Cust_Ph_Num,Bill_Date,Bill_Total,Special_Discount,Bill_Round_Amount,Bill_Final_Amount) VALUES ('0000024','suresh0001','dsf',4143212321,'2019-1-11',482.02,1,2.2,475)"}
+
+generatePDF:
+Info:{"code":"ER_DUP_ENTRY","errno":1062,"sqlMessage":"Duplicate entry '0000024' for key 'PRIMARY'","sqlState":"23000","index":0,"sql":"INSERT INTO bill_details_tb(Bill_Id,Emp_Id,Cust_Name,Cust_Ph_Num,Bill_Date,Bill_Total,Special_Discount,Bill_Round_Amount,Bill_Final_Amount) VALUES ('0000024','suresh0001','dsf',4143212321,'2019-1-11',482.02,1,2.2,475)"}
+
